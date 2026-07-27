@@ -49,17 +49,20 @@ const CHECKOUT_CONFIG = {
     if (cart.length === 0) {
       itemsEl.innerHTML = '<p class="mono cart-empty">// PEDIDO VACÍO — agrega productos desde el catálogo</p>';
       totalEl.textContent = fmt.format(0);
+      if (shipEl) shipEl.textContent = "—";
+      if (grandEl) grandEl.textContent = fmt.format(0);
       return;
     }
     itemsEl.innerHTML = cart.map(i => {
       const p = producto(i.id);
       if (!p) return "";
       const precio = p.price === null ? "POR CONFIRMAR" : fmt.format(p.price * i.qty);
+      const max = typeof stockDe === "function" ? stockDe(p.id) : 99;
       return `
         <div class="cart-item" data-id="${p.id}">
           <div class="cart-item-info">
             <span class="cart-item-name">${p.name}</span>
-            <span class="mono cart-item-spec">${p.spec} · ${p.price === null ? "—" : fmt.format(p.price)}</span>
+            <span class="mono cart-item-spec">${p.spec} · ${p.price === null ? "—" : fmt.format(p.price)} · máx ${max}</span>
           </div>
           <div class="qty-ctrl mono">
             <button type="button" data-cart="menos" aria-label="Quitar uno">−</button>
@@ -71,12 +74,38 @@ const CHECKOUT_CONFIG = {
         </div>`;
     }).join("");
     totalEl.textContent = fmt.format(totalPrecio());
+    renderShipping();
+  }
+
+  /* ---------- Envío ---------- */
+  const shipSelect = document.getElementById("cart-state");
+  const shipEl = document.getElementById("cart-shipping");
+  const grandEl = document.getElementById("cart-grand");
+
+  let estadoSel = localStorage.getItem("peptinator_state") || "";
+
+  function precioEnvio() {
+    if (!estadoSel || typeof shippingPriceFor !== "function") return null;
+    return shippingPriceFor(estadoSel);
+  }
+
+  function renderShipping() {
+    if (shipSelect && !shipSelect.dataset.ready) {
+      shipSelect.innerHTML = '<option value="">Estado de envío…</option>' +
+        ESTADOS_MX.map(e => `<option${e === estadoSel ? " selected" : ""}>${e}</option>`).join("");
+      shipSelect.dataset.ready = "1";
+    }
+    const envio = precioEnvio();
+    if (shipEl) shipEl.textContent = envio === null ? "—" : fmt.format(envio);
+    if (grandEl) grandEl.textContent = fmt.format(totalPrecio() + (envio || 0));
   }
 
   function add(id, qty) {
+    const max = typeof stockDe === "function" ? stockDe(id) : 99;
+    if (max <= 0) return; // agotado: no se puede agregar (anti-sobreventa)
     const item = cart.find(i => i.id === id);
-    if (item) item.qty = Math.min(item.qty + qty, 99);
-    else cart.push({ id, qty });
+    if (item) item.qty = Math.min(item.qty + qty, max);
+    else cart.push({ id, qty: Math.min(qty, max) });
     save();
     render();
   }
@@ -95,8 +124,13 @@ const CHECKOUT_CONFIG = {
       const precio = p.price === null ? "precio por confirmar" : fmt.format(p.price * i.qty);
       return `• ${p.name} ${p.spec} x${i.qty} — ${precio}`;
     }).filter(Boolean);
-    const msg = ["PEDIDO PEPTINATOR MX", "", ...lineas, "",
-                 `TOTAL: ${fmt.format(totalPrecio())} MXN`, "",
+    const envio = precioEnvio();
+    const lineaEnvio = envio !== null
+      ? `• Envío DHL a ${estadoSel} — ${fmt.format(envio)}`
+      : "• Envío DHL — por confirmar estado";
+    const msg = ["PEDIDO PEPTINATOR MX", "", ...lineas, lineaEnvio, "",
+                 `Subtotal: ${fmt.format(totalPrecio())} MXN`,
+                 `TOTAL CON ENVÍO: ${fmt.format(totalPrecio() + (envio || 0))} MXN`, "",
                  "Mi nombre es:"].join("\n");
     window.open(`https://wa.me/${CHECKOUT_CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
   }
@@ -107,6 +141,12 @@ const CHECKOUT_CONFIG = {
   const closeBtn = document.getElementById("cart-close");
   if (closeBtn) closeBtn.addEventListener("click", close);
 
+  if (shipSelect) shipSelect.addEventListener("change", () => {
+    estadoSel = shipSelect.value;
+    localStorage.setItem("peptinator_state", estadoSel);
+    renderShipping();
+  });
+
   const waBtn = document.getElementById("cart-whatsapp");
   if (waBtn) waBtn.addEventListener("click", checkoutWhatsApp);
 
@@ -116,7 +156,8 @@ const CHECKOUT_CONFIG = {
     const id = btn.closest(".cart-item").dataset.id;
     const item = cart.find(i => i.id === id);
     if (!item) return;
-    if (btn.dataset.cart === "mas") item.qty = Math.min(item.qty + 1, 99);
+    const max = typeof stockDe === "function" ? stockDe(id) : 99;
+    if (btn.dataset.cart === "mas") item.qty = Math.min(item.qty + 1, max);
     if (btn.dataset.cart === "menos") item.qty = Math.max(item.qty - 1, 1);
     if (btn.dataset.cart === "del") cart = cart.filter(i => i.id !== id);
     save();

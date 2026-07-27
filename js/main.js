@@ -78,12 +78,22 @@
 
   function modalHTML(p) {
     const specs = SPECS_COMUNES.map(s => `<li>${s}</li>`).join("");
+    const stock = typeof stockDe === "function" ? stockDe(p.id) : 0;
+    const stockLinea = stock > 0
+      ? `<p class="mono stock-linea">▣ EN EXISTENCIA: ${stock} pza${stock === 1 ? "" : "s"}</p>`
+      : '<p class="mono stock-linea agotado">▣ AGOTADO — REABASTECIMIENTO EN CURSO</p>';
     const buyBlock = p.price === null
       ? `<div class="modal-buy">
            <p class="mono buy-pending">// PRODUCTO SIN PRECIO ASIGNADO — SOLICITA COTIZACIÓN</p>
            <button class="btn btn-primary" data-action="pedir">▸ Solicitar cotización</button>
          </div>`
+      : stock <= 0
+      ? `<div class="modal-buy">
+           ${stockLinea}
+           <p class="mono buy-note">// Sin existencia por el momento — escríbenos por WhatsApp para apartar del próximo lote.</p>
+         </div>`
       : `<div class="modal-buy">
+           ${stockLinea}
            <div class="qty-row">
              <span class="mono qty-label">CANTIDAD</span>
              <div class="qty-ctrl mono">
@@ -155,7 +165,11 @@
     const btn = e.target.closest("[data-action]");
     if (!btn) return;
     const action = btn.dataset.action;
-    if (action === "mas") { qty = Math.min(qty + 1, 99); refreshQty(); }
+    if (action === "mas") {
+      const max = currentProduct && typeof stockDe === "function" ? stockDe(currentProduct.id) : 99;
+      qty = Math.min(qty + 1, max);
+      refreshQty();
+    }
     if (action === "menos") { qty = Math.max(qty - 1, 1); refreshQty(); }
     if (action === "agregar") {
       if (window.PeptinatorCart && currentProduct) {

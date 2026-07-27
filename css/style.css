@@ -942,3 +942,48 @@ section { padding: 5rem 6vw; }
 .cart-brands .brand-mc .mc-c1, .cart-brands .brand-mc .mc-c2 { width: 18px; height: 18px; }
 
 .cart-brands .brand-mc .mc-c2 { margin-left: -7px; }
+
+/* ---------- Stock en ficha ---------- */
+.stock-linea {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  color: #6fd66f;
+  margin-bottom: 1.1rem;
+}
+
+.stock-linea.agotado { color: var(--red); }
+
+/* ---------- Envío en carrito ---------- */
+.cart-ship-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.brand-dhl {
+  background: #ffcc00;
+  color: #d40511;
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.cart-state {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--chrome-3);
+  color: var(--chrome-1);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+}
+
+.cart-state:focus { outline: none; border-color: var(--red); }
+
+.cart-sub-row { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0.45rem; }
+
+.cart-sub-row span:last-child { font-family: var(--font-mono); font-weight: 400; color: var(--chrome-2); text-shadow: none; }

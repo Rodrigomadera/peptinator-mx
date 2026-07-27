@@ -267,9 +267,21 @@
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-foot">
+      <div class="cart-ship-row">
+        <span class="brand-badge brand-dhl">DHL</span>
+        <select id="cart-state" class="cart-state mono" aria-label="Estado de envío"></select>
+      </div>
+      <div class="cart-total-row mono cart-sub-row">
+        <span>SUBTOTAL</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <div class="cart-total-row mono cart-sub-row">
+        <span>ENVÍO (DHL)</span>
+        <span id="cart-shipping">—</span>
+      </div>
       <div class="cart-total-row mono">
         <span>TOTAL</span>
-        <span id="cart-total">$0</span>
+        <span id="cart-grand">$0</span>
       </div>
       <button class="btn btn-primary cart-checkout" id="cart-whatsapp" type="button">▸ Confirmar pedido por WhatsApp</button>
       <div class="card-brands cart-brands" aria-label="Métodos de pago aceptados">
@@ -283,6 +295,8 @@
   </aside>
 
   <script src="js/data.js"></script>
+  <script src="js/stock.js"></script>
+  <script src="js/shipping.js"></script>
   <script src="js/stripe-config.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
