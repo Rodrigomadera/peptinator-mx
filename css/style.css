@@ -925,3 +925,20 @@ section { padding: 5rem 6vw; }
   .cart-item-del { position: absolute; right: 0; top: 0.8rem; }
   .cart-item { position: relative; }
 }
+
+/* ---------- Badge OXXO + logos en carrito ---------- */
+.brand-oxxo {
+  color: #d32f2f;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.cart-brands { justify-content: center; margin-bottom: 0.9rem; }
+
+.cart-brands .brand-badge { height: 28px; min-width: 48px; font-size: 0.72rem; }
+
+.cart-brands .brand-mc .mc-c1, .cart-brands .brand-mc .mc-c2 { width: 18px; height: 18px; }
+
+.cart-brands .brand-mc .mc-c2 { margin-left: -7px; }
