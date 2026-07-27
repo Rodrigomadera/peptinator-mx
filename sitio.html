@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEPTINATOR MX | Péptidos de Investigación — Pureza ≥99% HPLC</title>
+  <meta name="description" content="PEPTINATOR MX — péptidos de investigación de grado analítico en México. Pureza ≥99% verificada por HPLC y MS, COA por lote. Para uso en investigación solamente.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Guardia de edad: sin verificación +18, regresar a la puerta
+    if (sessionStorage.getItem("peptinator_age_ok") !== "1") {
+      window.location.replace("index.html");
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ====== HUD superior ====== -->
+  <header class="hud-header" id="top">
+    <div class="hud-status">
+      <span class="blink-dot" aria-hidden="true"></span>
+      <span class="mono">SYSTEM ONLINE · MÉXICO</span>
+    </div>
+    <a class="logo" href="#top" aria-label="PEPTINATOR MX inicio">
+      PEPTINATOR<span class="logo-mx">MX</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#protocolo">Protocolo</a>
+      <a href="#confianza">Confianza</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="Endoesqueleto cromado con óptica roja, estilo sci-fi"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="mono hero-kicker">// UNIDAD DE ANÁLISIS ACTIVA — SERIE P-800</p>
+      <h1>PÉPTIDOS DE INVESTIGACIÓN<br><span class="red-glow">SIN MARGEN DE ERROR</span></h1>
+      <p class="hero-sub">
+        Grado analítico para la comunidad científica mexicana. Cada compuesto pasa por
+        verificación de identidad por espectrometría de masas y pureza ≥99% por HPLC,
+        con Certificado de Análisis trazable por lote.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#catalogo">▸ Ver catálogo</a>
+        <a class="btn btn-ghost" href="#protocolo">Protocolo de calidad</a>
+      </div>
+      <ul class="hero-stats mono">
+        <li><strong>≥99%</strong> pureza HPLC</li>
+        <li><strong>MS</strong> identidad confirmada</li>
+        <li><strong>COA</strong> por cada lote</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====== Aviso legal ====== -->
+  <aside class="legal-banner mono" role="note">
+    ⚠ PARA USO EN INVESTIGACIÓN SOLAMENTE — No es medicamento, suplemento ni alimento.
+    No destinado a consumo humano, diagnóstico ni tratamiento.
+  </aside>
+
+  <!-- ====== Catálogo ====== -->
+  <main>
+    <!-- ====== Qué es un péptido ====== -->
+    <section id="que-es" class="peptido-info">
+      <div class="section-head">
+        <p class="mono section-kicker">// ARCHIVO_EDUCATIVO_01</p>
+        <h2>¿QUÉ ES UN PÉPTIDO?</h2>
+      </div>
+      <div class="peptide-grid">
+        <article class="peptide-point">
+          <h3>Son bloques naturales de tu cuerpo</h3>
+          <p>Un péptido es una cadena corta de aminoácidos — los mismos componentes con los que el cuerpo construye sus proteínas.</p>
+        </article>
+        <article class="peptide-point">
+          <h3>Se forman como eslabones</h3>
+          <p>Cada aminoácido se une al siguiente mediante un enlace peptídico; unas cuantas decenas forman un péptido, y cientos forman una proteína.</p>
+        </article>
+        <article class="peptide-point">
+          <h3>Tu cuerpo ya los usa todos los días</h3>
+          <p>Hormonas como la insulina, enzimas y muchas señales celulares son péptidos o están hechas de ellos. No son sustancias extrañas: son mensajeros que tu biología ya reconoce.</p>
+        </article>
+        <article class="peptide-point">
+          <h3>Ya son parte de la medicina moderna</h3>
+          <p>La insulina y los agonistas GLP-1 — algunos de los fármacos más recetados del mundo, desarrollados por grandes farmacéuticas — son péptidos. Es una de las clases de moléculas más estudiadas y consolidadas de la industria.</p>
+        </article>
+        <article class="peptide-point">
+          <h3>Por eso se investigan</h3>
+          <p>En ciencia y medicina, los péptidos permiten estudiar procesos como regeneración, metabolismo y envejecimiento con precisión molecular.</p>
+        </article>
+        <article class="peptide-point">
+          <h3>Calidad verificable</h3>
+          <p>Cada compuesto de PEPTINATOR MX tiene pureza ≥99% confirmada por HPLC, identidad por espectrometría de masas y certificado de análisis por lote. Para uso en investigación solamente.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalog">
+      <div class="section-head">
+        <p class="mono section-kicker">// OBJETIVOS ADQUIRIDOS: <span id="product-count">21</span></p>
+        <h2>CATÁLOGO</h2>
+        <p class="mono catalog-note">*La etiqueta puede variar levemente</p>
+      </div>
+      <div class="filters mono" id="filters" role="tablist" aria-label="Filtrar por categoría"></div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+
+    <!-- ====== Protocolo de calidad ====== -->
+    <section id="protocolo" class="protocol">
+      <div class="section-head">
+        <p class="mono section-kicker">// SECUENCIA DE VERIFICACIÓN</p>
+        <h2>PROTOCOLO DE CALIDAD</h2>
+      </div>
+      <div class="protocol-grid">
+        <article class="protocol-card">
+          <span class="mono step">FASE_01</span>
+          <h3>Síntesis y liofilización</h3>
+          <p>Cada péptido se sintetiza bajo control de proceso y se liofiliza para preservar estabilidad durante el transporte y almacenamiento.</p>
+        </article>
+        <article class="protocol-card">
+          <span class="mono step">FASE_02</span>
+          <h3>Análisis HPLC</h3>
+          <p>Cromatografía líquida de alta resolución en cada lote. Solo se libera material con pureza igual o superior al 99%.</p>
+        </article>
+        <article class="protocol-card">
+          <span class="mono step">FASE_03</span>
+          <h3>Espectrometría de masas</h3>
+          <p>La identidad molecular se confirma por MS. Si la masa no coincide con la secuencia objetivo, el lote se destruye.</p>
+        </article>
+        <article class="protocol-card">
+          <span class="mono step">FASE_04</span>
+          <h3>COA y trazabilidad</h3>
+          <p>Todo vial incluye número de lote vinculado a su Certificado de Análisis. Puedes solicitar el COA de tu lote antes de comprar.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====== Confianza ====== -->
+    <section id="confianza" class="trust">
+      <div class="section-head">
+        <p class="mono section-kicker">// PARÁMETROS DE CONFIANZA</p>
+        <h2>POR QUÉ PEPTINATOR</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item mono">
+          <span class="trust-icon">▣</span>
+          <h3>COA verificable</h3>
+          <p>Certificado de análisis de ejemplo disponible y verificación de lote bajo solicitud.</p>
+        </div>
+        <div class="trust-item mono">
+          <span class="trust-icon">▣</span>
+          <h3>Envío nacional</h3>
+          <p>Cobertura a las 32 entidades de México con empaque discreto y cadena de frío cuando aplica.</p>
+        </div>
+        <div class="trust-item mono">
+          <span class="trust-icon">▣</span>
+          <h3>Devolución 30 días</h3>
+          <p>Si el producto llega comprometido, lo reponemos o te devolvemos tu dinero.</p>
+        </div>
+        <div class="trust-item mono">
+          <span class="trust-icon">▣</span>
+          <h3>Soporte técnico</h3>
+          <p>Glosario técnico y acompañamiento para interpretar COA, HPLC y datos de espectrometría.</p>
+        </div>
+      </div>
+      <figure class="coa-figure">
+        <img src="img/coa.jpg" alt="Visualización holográfica de un certificado de análisis de laboratorio" loading="lazy">
+        <figcaption class="mono">ANÁLISIS_VISUAL // COA + HPLC + MS</figcaption>
+      </figure>
+    </section>
+
+    <!-- ====== Contacto (pendiente) ====== -->
+    <section id="contacto" class="contact">
+      <div class="section-head">
+        <p class="mono section-kicker">// CANAL DE COMUNICACIÓN</p>
+        <h2>CONTACTO</h2>
+      </div>
+      <div class="contact-card">
+        <p class="mono contact-status"><span class="blink-dot"></span> ENLACE EN CONFIGURACIÓN…</p>
+        <p>
+          Los canales oficiales de atención (correo, WhatsApp y dominio web) se activarán
+          cuando el dominio definitivo esté operativo.
+        </p>
+        <ul class="mono contact-pending">
+          <li>DOMINIO: <em>pendiente</em></li>
+          <li>CORREO: <em>pendiente</em></li>
+          <li>WHATSAPP: <em>pendiente</em></li>
+        </ul>
+        <p class="mono contact-note">// Mientras tanto, guarda esta página — el catálogo y precios ya son definitivos.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====== Footer ====== -->
+  <footer class="footer mono">
+    <p class="footer-brand">PEPTINATOR<span>MX</span> — unidad de distribución de péptidos de investigación</p>
+    <p class="footer-legal">
+      Todos los compuestos se ofrecen exclusivamente para investigación científica in vitro.
+      No están aprobados como medicamento, suplemento ni alimento, y no están destinados a
+      consumo humano, diagnóstico ni tratamiento.
+    </p>
+    <p class="footer-copy">© 2026 PEPTINATOR MX · Precios en MXN · Catálogo sujeto a disponibilidad de lote</p>
+  </footer>
+
+  <!-- ====== Modal ficha de producto ====== -->
+  <div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-label="Ficha de producto">
+    <div class="modal-box">
+      <button class="modal-close mono" type="button" aria-label="Cerrar ficha">✕ CERRAR</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/stripe-config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

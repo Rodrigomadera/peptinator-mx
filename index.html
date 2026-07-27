@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEPTINATOR MX | Verificación de edad</title>
+  <meta name="description" content="PEPTINATOR MX — sitio destinado a mayores de 18 años. Verificación de edad requerida.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/gate.css">
+</head>
+<body class="gate-body">
+
+  <div class="gate-bg" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <main class="gate-wrap">
+    <!-- ====== Verificación ====== -->
+    <div class="gate-card" id="gate-card">
+      <p class="mono gate-kicker"><span class="blink-dot"></span> CONTROL_DE_ACCESO // SERIE P-800</p>
+      <h1 class="logo gate-logo">PEPTINATOR<span class="logo-mx">MX</span></h1>
+      <p class="gate-text">
+        Este sitio contiene compuestos destinados a investigación científica
+        y está dirigido exclusivamente a <strong>mayores de 18 años</strong>.
+      </p>
+      <p class="mono gate-question">// CONFIRMA TU EDAD PARA CONTINUAR</p>
+      <div class="gate-actions">
+        <button class="btn btn-primary gate-btn" id="btn-adult" type="button">▸ Tengo 18 años o más</button>
+        <button class="btn btn-ghost gate-btn" id="btn-minor" type="button">Soy menor de 18</button>
+      </div>
+      <p class="mono gate-legal">
+        Al entrar aceptas que todos los productos son para uso en investigación solamente.
+        No son medicamentos, suplementos ni alimentos.
+      </p>
+    </div>
+
+    <!-- ====== Acceso denegado ====== -->
+    <div class="gate-card gate-denied" id="gate-denied" hidden>
+      <p class="mono gate-kicker denied-kicker"><span class="blink-dot"></span> ACCESO_DENEGADO</p>
+      <h1 class="gate-denied-title">SITIO SOLO PARA<br>MAYORES DE EDAD</h1>
+      <p class="gate-text">
+        PEPTINATOR MX es un sitio destinado exclusivamente a personas mayores de 18 años.
+        No podemos darte acceso. Gracias por tu honestidad.
+      </p>
+      <p class="mono gate-legal">// SESIÓN TERMINADA — VUELVE CUANDO CUMPLAS 18</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var btnAdult = document.getElementById("btn-adult");
+      var btnMinor = document.getElementById("btn-minor");
+      var card = document.getElementById("gate-card");
+      var denied = document.getElementById("gate-denied");
+
+      if (sessionStorage.getItem("peptinator_age_ok") === "1") {
+        window.location.replace("sitio.html");
+        return;
+      }
+
+      btnAdult.addEventListener("click", function () {
+        sessionStorage.setItem("peptinator_age_ok", "1");
+        window.location.href = "sitio.html";
+      });
+
+      btnMinor.addEventListener("click", function () {
+        card.hidden = true;
+        denied.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>
