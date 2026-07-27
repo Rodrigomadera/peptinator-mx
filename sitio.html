@@ -31,7 +31,11 @@
       <a href="#catalogo">Catálogo</a>
       <a href="#protocolo">Protocolo</a>
       <a href="#confianza">Confianza</a>
+      <a href="#pago">Pago</a>
       <a href="#contacto">Contacto</a>
+      <button class="cart-open mono" type="button" aria-label="Ver pedido">
+        PEDIDO <span class="cart-count">0</span>
+      </button>
     </nav>
   </header>
 
@@ -175,6 +179,36 @@
       </figure>
     </section>
 
+    <!-- ====== Métodos de pago ====== -->
+    <section id="pago" class="payment">
+      <div class="section-head">
+        <p class="mono section-kicker">// PROTOCOLO_DE_COBRO</p>
+        <h2>MÉTODOS DE PAGO</h2>
+      </div>
+      <div class="payment-grid">
+        <article class="payment-card">
+          <h3>Transferencia SPEI</h3>
+          <p>Método principal. Al confirmar tu pedido por WhatsApp te compartimos la CLABE y referencia. Tu pedido se prepara en cuanto se acredita.</p>
+          <p class="mono payment-status">CLABE: <em>pendiente</em></p>
+        </article>
+        <article class="payment-card">
+          <h3>Tarjeta — Link de pago*</h3>
+          <p>Paga con tarjeta de crédito o débito mediante un link de pago seguro de MercadoPago. Lo generamos para tu pedido al confirmarlo por WhatsApp.</p>
+          <div class="card-brands" aria-label="Tarjetas aceptadas por MercadoPago">
+            <span class="brand-badge brand-visa">VISA</span>
+            <span class="brand-badge brand-mc"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+            <span class="brand-badge brand-amex">AMEX</span>
+          </div>
+          <p class="mono payment-note">*El link de pago se genera por pedido, con tarjeta a meses según promoción de MercadoPago.</p>
+        </article>
+        <article class="payment-card">
+          <h3>WhatsApp</h3>
+          <p>Todo pedido se confirma por WhatsApp: revisas productos, total y método de pago directamente con nosotros antes de pagar.</p>
+          <p class="mono payment-status">NÚMERO: <em>pendiente</em></p>
+        </article>
+      </div>
+    </section>
+
     <!-- ====== Contacto (pendiente) ====== -->
     <section id="contacto" class="contact">
       <div class="section-head">
@@ -216,8 +250,27 @@
     </div>
   </div>
 
+  <!-- ====== Carrito / pedido ====== -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Tu pedido">
+    <div class="cart-head">
+      <h3 class="mono">// TU_PEDIDO</h3>
+      <button class="cart-close mono" id="cart-close" type="button" aria-label="Cerrar pedido">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row mono">
+        <span>TOTAL</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <button class="btn btn-primary cart-checkout" id="cart-whatsapp" type="button">▸ Confirmar pedido por WhatsApp</button>
+      <p class="mono cart-note">// El pago se acuerda al confirmar: transferencia SPEI o link de pago con tarjeta.</p>
+    </div>
+  </aside>
+
   <script src="js/data.js"></script>
   <script src="js/stripe-config.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
