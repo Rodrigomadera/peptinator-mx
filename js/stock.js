@@ -6,31 +6,32 @@
 //   - Bloquea agregar al pedido cuando stock = 0
 //   - Limita la cantidad del carrito al stock disponible (anti-sobreventa)
 // NOTA: al ser sitio estático, este archivo se edita y se sube con git push.
-// Para editar stock sin tocar código (p.ej. desde Google Sheets), avísanos
-// y migramos la lectura a una hoja de cálculo.
+//
+// Última actualización: 2026-07-26 — según cotización de proveedor
+// (cajas × 10 viales por caja).
 
 const STOCK = {
-  "retatrutida":  10,
-  "ghk-cu":       15,
-  "tesamorelin":  8,
-  "ipamorelin":   12,
-  "bpc-157":      20,
-  "tb-500":       14,
-  "kpv":          9,
-  "epithalon":    11,
-  "ahk-cu":       7,
-  "selank":       10,
-  "mots-c":       10,
-  "nad":          6,
-  "semax":        10,
-  "ipa-cjc":      8,
-  "bpc-tb":       9,
-  "glow":         5,
-  "klow":         4,
-  "melanotan-1":  8,
-  "melanotan-2":  8,
-  "5amino1mq":    10,
-  "agua-bac":     25
+  "retatrutida":  30,   // 3 cajas × 10
+  "ghk-cu":       20,   // 2 cajas × 10 (50 mg)
+  "tesamorelin":  10,   // 1 caja × 10
+  "ipamorelin":   40,   // 4 cajas × 10 (5 mg)
+  "bpc-157":      30,   // 3 cajas × 10
+  "tb-500":       30,   // 3 cajas × 10
+  "kpv":          10,   // 1 caja × 10
+  "epithalon":    10,   // 1 caja × 10
+  "ahk-cu":       10,   // 1 caja × 10 (50 mg — ver nota en catálogo)
+  "selank":       10,   // 1 caja × 10
+  "mots-c":       10,   // 1 caja × 10
+  "nad":          10,   // 1 caja × 10
+  "semax":        10,   // 1 caja × 10
+  "ipa-cjc":      20,   // 2 cajas × 10
+  "bpc-tb":       20,   // 2 cajas × 10
+  "glow":         10,   // 1 caja × 10
+  "klow":         10,   // 1 caja × 10
+  "melanotan-1":  10,   // 1 caja × 10
+  "melanotan-2":  20,   // 2 cajas × 10
+  "5amino1mq":    10,   // 1 caja × 10
+  "agua-bac":     30    // 3 cajas × 10 (3 mL — ver nota en catálogo)
 };
 
 // Devuelve la existencia de un producto (0 si no está listado)
