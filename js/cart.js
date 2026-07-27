@@ -2,7 +2,7 @@
 // PEPTINATOR MX — Datos de contacto y cobro (PENDIENTES)
 // Rellenar cuando se tengan:
 const CHECKOUT_CONFIG = {
-  whatsapp: "",        // ej. "526621234567" (código país + número, sin +)
+  whatsapp: "529516383849", // +52 951 638 3849
   clabe: "",           // CLABE interbancaria para transferencias SPEI
   beneficiario: "",    // nombre del titular de la cuenta
 };
