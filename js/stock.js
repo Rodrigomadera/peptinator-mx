@@ -61,8 +61,13 @@ const STOCK_SHEET_CSV = ""; // <-- pegar aquí la URL de la hoja
     .then(r => r.text())
     .then(txt => {
       txt.trim().split(/\r?\n/).forEach(linea => {
-        const m = linea.match(/^"?([a-z0-9-]+)"?\s*,\s*"?(\d+)"?/i);
-        if (m && m[1] !== "id") STOCK[m[1]] = parseInt(m[2], 10);
+        // tolera CSV por comas o todo en una celda separado por tabulador
+        const partes = linea.split(/[\t,;]/)
+          .map(s => s.replace(/"/g, "").trim())
+          .filter(Boolean);
+        if (partes.length >= 2 && partes[0] !== "id" && /^\d+$/.test(partes[partes.length - 1])) {
+          STOCK[partes[0]] = parseInt(partes[partes.length - 1], 10);
+        }
       });
       document.dispatchEvent(new CustomEvent("stock:updated"));
     })
