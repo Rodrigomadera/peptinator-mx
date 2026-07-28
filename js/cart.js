@@ -167,5 +167,16 @@ const CHECKOUT_CONFIG = {
   // API pública para main.js
   window.PeptinatorCart = { add, open, render };
 
+  // Stock remoto actualizado (Google Sheets): revalidar límites del carrito
+  document.addEventListener("stock:updated", () => {
+    cart = cart.filter(i => (typeof stockDe === "function" ? stockDe(i.id) : 99) > 0);
+    cart.forEach(i => {
+      const max = typeof stockDe === "function" ? stockDe(i.id) : 99;
+      if (i.qty > max) i.qty = max;
+    });
+    save();
+    render();
+  });
+
   render();
 })();

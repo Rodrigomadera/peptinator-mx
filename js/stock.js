@@ -45,3 +45,26 @@ const STOCK = {
 function stockDe(productoId) {
   return STOCK[productoId] || 0;
 }
+
+// ============================================================
+// Stock en vivo desde Google Sheets
+// ============================================================
+// La hoja debe tener dos columnas: id | cantidad, y estar compartida
+// como "cualquiera con el enlace puede ver".
+// URL formato: https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv
+// Si la carga falla, la página usa los valores locales de arriba (respaldo).
+const STOCK_SHEET_CSV = ""; // <-- pegar aquí la URL de la hoja
+
+(function cargarStockRemoto() {
+  if (!STOCK_SHEET_CSV) return;
+  fetch(STOCK_SHEET_CSV)
+    .then(r => r.text())
+    .then(txt => {
+      txt.trim().split(/\r?\n/).forEach(linea => {
+        const m = linea.match(/^"?([a-z0-9-]+)"?\s*,\s*"?(\d+)"?/i);
+        if (m && m[1] !== "id") STOCK[m[1]] = parseInt(m[2], 10);
+      });
+      document.dispatchEvent(new CustomEvent("stock:updated"));
+    })
+    .catch(() => { /* sin internet o hoja privada: se usan los valores locales */ });
+})();

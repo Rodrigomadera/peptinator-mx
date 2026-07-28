@@ -40,11 +40,17 @@
       </article>`;
   }
 
+  let catActual = "todos";
+
   function render(cat) {
+    catActual = cat;
     const list = cat === "todos" ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
     grid.innerHTML = list.map(cardHTML).join("");
     countEl.textContent = list.length;
   }
+
+  // Stock remoto actualizado (Google Sheets): redibujar disponibilidad
+  document.addEventListener("stock:updated", () => render(catActual));
 
   function renderFilters() {
     const cats = ["todos", ...new Set(PRODUCTS.map(p => p.cat))];
