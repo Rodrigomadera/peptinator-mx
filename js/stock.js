@@ -19,7 +19,6 @@ const STOCK = {
   "tb-500":       30,   // 3 cajas × 10
   "kpv":          10,   // 1 caja × 10
   "epithalon":    10,   // 1 caja × 10
-  "ahk-cu":       10,   // 1 caja × 10 (50 mg — ver nota en catálogo)
   "selank":       10,   // 1 caja × 10
   "mots-c":       10,   // 1 caja × 10
   "nad":          10,   // 1 caja × 10
@@ -31,7 +30,15 @@ const STOCK = {
   "melanotan-1":  10,   // 1 caja × 10
   "melanotan-2":  20,   // 2 cajas × 10
   "5amino1mq":    10,   // 1 caja × 10
-  "agua-bac":     30    // 3 cajas × 10 (3 mL — ver nota en catálogo)
+  "agua-bac":     30,   // 3 cajas × 10 (3 mL)
+  "tirzepatida":  20,   // 2 cajas × 10
+  "semaglutida-5":  20, // 2 cajas × 10
+  "semaglutida-10": 20, // 2 cajas × 10
+  "ghk-cu-100":   20,   // 2 cajas × 10
+  "ipamorelin-10": 10,  // 1 caja × 10
+  "bpc-tb-20":    10,   // 1 caja × 10
+  "oxitocina-5":  10,   // 1 caja × 10
+  "oxitocina-10": 10    // 1 caja × 10
 };
 
 // Devuelve la existencia de un producto (0 si no está listado)

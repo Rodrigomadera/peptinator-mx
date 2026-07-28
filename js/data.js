@@ -18,8 +18,6 @@ const PRODUCTS = [
     desc: "Tripéptido derivado de α-MSH, investigado en modelos de inflamación intestinal y dérmica." },
   { id: "epithalon",      name: "Epithalon",                      spec: "10 mg",  price: 435,  cat: "longevidad",   img: "img/vials/epithalon.png",
     desc: "Tetrapéptido pineal en estudio por su relación con telomerasa y modelos de envejecimiento celular." },
-  { id: "ahk-cu",         name: "AHK-Cu",                         spec: "20 mg",  price: 1046, cat: "regeneracion", img: "img/vials/ahk-cu.png",
-    desc: "Análogo de GHK-Cu investigado en modelos de folículo piloso y regeneración de piel." },
   { id: "selank",         name: "Selank",                         spec: "5 mg",   price: 471,  cat: "cognitivo",    img: "img/vials/selank.png",
     desc: "Heptapéptido análogo de tuftsin, estudiado en modelos de ansiedad y procesos cognitivos." },
   { id: "mots-c",         name: "MOTS-c",                         spec: "10 mg",  price: 869,  cat: "metabolico",   img: "img/vials/mots-c.png",
@@ -42,9 +40,25 @@ const PRODUCTS = [
     desc: "Análogo cíclico de α-MSH estudiado en modelos de pigmentación y melanocortina." },
   { id: "5amino1mq",      name: "5-Amino-1MQ",                    spec: "10 mg",  price: 832,  cat: "metabolico",   img: "img/vials/5amino1mq.png",
     desc: "Inhibidor de NNMT en investigación sobre metabolismo energético y NAD+ celular." },
-  { id: "agua-bac",       name: "Agua Bacteriostática",           spec: "10 mL",  price: null, cat: "accesorio",    img: "img/vials/agua-bac.png",
+  { id: "agua-bac",       name: "Agua Bacteriostática",           spec: "3 mL",   price: 37,   cat: "accesorio",    img: "img/vials/agua-bac.png",
     note: "Diluyente para reconstitución de péptidos liofilizados",
-    desc: "Agua estéril con alcohol bencílico al 0.9%, estándar de laboratorio para reconstituir péptidos liofilizados." }
+    desc: "Agua estéril con alcohol bencílico al 0.9%, estándar de laboratorio para reconstituir péptidos liofilizados. Precio de costo (≈ $2 USD)." },
+  { id: "tirzepatida",    name: "Tirzepatida",                    spec: "15 mg",  price: 1549, cat: "metabolico",   img: "img/vials/tirzepatida.png",
+    desc: "Agonista dual de GIP y GLP-1 en investigación para estudios de metabolismo, peso y sensibilidad a la insulina." },
+  { id: "semaglutida-5",  name: "Semaglutida",                    spec: "5 mg",   price: 749,  cat: "metabolico",   img: "img/vials/semaglutida-5.png",
+    desc: "Agonista de GLP-1 ampliamente estudiado en modelos de metabolismo energético y control glucémico." },
+  { id: "semaglutida-10", name: "Semaglutida",                    spec: "10 mg",  price: 949,  cat: "metabolico",   img: "img/vials/semaglutida-10.png",
+    desc: "Agonista de GLP-1 ampliamente estudiado en modelos de metabolismo energético y control glucémico." },
+  { id: "ghk-cu-100",     name: "GHK-Cu (Copper)",                spec: "100 mg", price: 649,  cat: "regeneracion", img: "img/vials/ghk-cu-100.png",
+    desc: "Tripéptido de cobre estudiado en modelos de regeneración de piel, folículo piloso y tejido conectivo. Presentación de 100 mg." },
+  { id: "ipamorelin-10",  name: "Ipamorelin",                     spec: "10 mg",  price: 779,  cat: "secretagogo",  img: "img/vials/ipamorelin-10.png",
+    desc: "Secretagogo de GH altamente selectivo, referente en estudios del eje GH/IGF-1. Presentación de 10 mg." },
+  { id: "bpc-tb-20",      name: "BPC-157 + TB-500",               spec: "20 mg",  price: 3699, cat: "regeneracion", img: "img/vials/bpc-tb-20.png",
+    desc: "Blend combinado de BPC-157 y TB-500 para modelos de recuperación y reparación tisular amplia. Presentación de 20 mg." },
+  { id: "oxitocina-5",    name: "Oxitocina",                      spec: "5 mg",   price: 549,  cat: "cognitivo",    img: "img/vials/oxitocina-5.png",
+    desc: "Neuropéptido natural en investigación sobre vínculo social, estado de ánimo y respuesta al estrés." },
+  { id: "oxitocina-10",   name: "Oxitocina",                      spec: "10 mg",  price: 1199, cat: "cognitivo",    img: "img/vials/oxitocina-10.png",
+    desc: "Neuropéptido natural en investigación sobre vínculo social, estado de ánimo y respuesta al estrés. Presentación de 10 mg." }
 ];
 
 const CATEGORIES = {
