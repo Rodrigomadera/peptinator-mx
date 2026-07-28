@@ -53,7 +53,7 @@ function stockDe(productoId) {
 // como "cualquiera con el enlace puede ver".
 // URL formato: https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv
 // Si la carga falla, la página usa los valores locales de arriba (respaldo).
-const STOCK_SHEET_CSV = ""; // <-- pegar aquí la URL de la hoja
+const STOCK_SHEET_CSV = "https://docs.google.com/spreadsheets/d/1EFK3XeOig1J8VEntEz6QEFVpFKdPpZA19ZwUvT5Iuxk/gviz/tq?tqx=out:csv";
 
 (function cargarStockRemoto() {
   if (!STOCK_SHEET_CSV) return;
