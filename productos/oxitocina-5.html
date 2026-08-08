@@ -53,6 +53,14 @@
     .testi-card span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--chrome-2); letter-spacing: 0.1em; }
     .testi-empty { border: 1.5px dashed #26262e; border-radius: 0; padding: 1.4rem; text-align: center; color: var(--text-dim); font-size: 0.95rem; }
     .testi-empty a { color: var(--red); font-weight: 600; }
+    .testi-form { background: var(--bg-panel); border: 1px solid #26262e; border-radius: 0; padding: 1.3rem 1.4rem; margin-top: 1.4rem; max-width: 560px; }
+    .testi-form h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 900; color: var(--chrome-1); margin-bottom: 0.9rem; }
+    .testi-form input, .testi-form textarea { width: 100%; background: var(--bg-card); border: 1px solid #26262e; border-radius: {'8px' if ES_PEPTIVA else '0'}; padding: 0.6rem 0.9rem; font-family: var(--font-body); font-size: 0.95rem; color: var(--chrome-1); outline: none; margin-bottom: 0.7rem; box-sizing: border-box; }
+    .testi-form input:focus, .testi-form textarea:focus { border-color: var(--red); }
+    .testi-form textarea { min-height: 90px; resize: vertical; }
+    .testi-form button { border: none; cursor: pointer; }
+    .testi-ok { display: none; color: var(--red); font-size: 0.9rem; margin-top: 0.7rem; }
+    .testi-mod { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 0.6rem; }
   </style>
 </head>
 <body>
@@ -94,6 +102,14 @@
     <section class="pp-testi">
       <h2>TESTIMONIOS</h2>
       <div id="testi-list"></div>
+      <form class="testi-form" id="testi-form">
+        <h3>Comparte tu experiencia</h3>
+        <input type="text" id="tf-nombre" placeholder="Tu nombre (o iniciales)" maxlength="40" required>
+        <textarea id="tf-texto" placeholder="Cuéntanos cómo fue tu experiencia con este producto..." maxlength="500" required></textarea>
+        <button class="btn btn-primary" type="submit">▸ Enviar testimonio</button>
+        <p class="testi-ok" id="tf-ok">✓ Gracias — tu testimonio se publicará tras validación.</p>
+        <p class="testi-mod">// Se publica tras revisión del equipo. Sin spam ni datos personales.</p>
+      </form>
     </section>
   </main>
   <footer class="footer mono">
@@ -103,6 +119,7 @@
   <a class="wa-float" href="https://wa.me/529516383849?text=Hola%20PEPTINATOR%20MX%2C%20me%20interesa%20Oxitocina%205%20mg" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4 0-.6.2-.8l.5-.6c.1-.2.1-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a12.6 12.6 0 0 0 4.8 4.5c1.8.8 2.5.9 3.4.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.2-.3-.2-.6-.3z"/></svg>
   </a>
+  <script>const APPS_FALLBACK = "";</script>
   <script src="../js/testimonios.js"></script>
   <script>
     (function () {
@@ -128,12 +145,34 @@
           });
         }
       });
-      // testimonios
+      // testimonios aprobados desde la Sheet (pestaña "testimonios")
       const lista = document.getElementById("testi-list");
-      const items = (typeof TESTIMONIOS !== "undefined" && TESTIMONIOS["oxitocina-5"]) || [];
-      lista.innerHTML = items.length
-        ? items.map(t => `<div class="testi-card"><p>"${t.texto}"</p><span>${t.nombre} · ${t.fecha}</span></div>`).join("")
-        : `<div class="testi-empty">Aún no hay testimonios de este producto.<br><a href="https://wa.me/529516383849?text=Hola%2C%20quiero%20compartir%20mi%20experiencia%20con%20Oxitocina" target="_blank" rel="noopener">Sé el primero en compartir tu experiencia →</a></div>`;
+      const SHEET_T = "https://docs.google.com/spreadsheets/d/1EFK3XeOig1J8VEntEz6QEFVpFKdPpZA19ZwUvT5Iuxk/gviz/tq?tqx=out:csv&sheet=testimonios";
+      fetch(SHEET_T).then(r => r.text()).then(t => {
+        const filas = t.trim().split(/
+?
+/).slice(1).map(l => l.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(c => c.replace(/^"|"$/g, "").trim()));
+        const items = filas.filter(f => f[1] === "oxitocina-5" && f[4] === "aprobado");
+        lista.innerHTML = items.length
+          ? items.map(f => `<div class="testi-card"><p>"${f[3]}"</p><span>${f[2]} · ${f[0]}</span></div>`).join("")
+          : '<div class="testi-empty">Aún no hay testimonios publicados de este producto.<br>Sé el primero en compartir tu experiencia ↓</div>';
+      }).catch(() => {
+        lista.innerHTML = '<div class="testi-empty">Sé el primero en compartir tu experiencia ↓</div>';
+      });
+
+      // envio del formulario (Apps Script, pestaña "testimonios", estado pendiente)
+      const APPS = (typeof APPS_SCRIPT_URL !== "undefined" && APPS_SCRIPT_URL) || APPS_FALLBACK;
+      document.getElementById("testi-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const nombre = document.getElementById("tf-nombre").value.trim();
+        const texto = document.getElementById("tf-texto").value.trim();
+        if (!nombre || !texto) return;
+        const body = new URLSearchParams({ producto: "oxitocina-5", nombre, texto }).toString();
+        fetch(APPS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body })
+          .catch(() => {});
+        this.reset();
+        document.getElementById("tf-ok").style.display = "block";
+      });
     })();
   </script>
 </body>
