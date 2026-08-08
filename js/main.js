@@ -112,6 +112,7 @@
            <div class="buy-actions">
              <button class="btn btn-primary" data-action="agregar">▸ Agregar al pedido</button>
              <button class="btn btn-ghost" data-action="coa">Solicitar COA del lote</button>
+             <button class="btn btn-ghost" data-action="compartir">⇗ Compartir</button>
            </div>
            <p class="mono buy-note">// El pago se confirma por WhatsApp: transferencia SPEI o link de pago con tarjeta.</p>
          </div>`;
@@ -182,6 +183,15 @@
         window.PeptinatorCart.add(currentProduct.id, qty);
         closeModal();
         window.PeptinatorCart.open();
+      }
+    }
+    if (action === "compartir") {
+      const url = location.origin + location.pathname.replace(/[^/]*$/, "") + "productos/" + currentProduct.id + ".html";
+      const texto = "PEPTINATOR MX - " + currentProduct.name + " " + currentProduct.spec;
+      if (navigator.share) {
+        navigator.share({ title: texto, text: texto, url: url }).catch(() => {});
+      } else {
+        window.open("https://wa.me/?text=" + encodeURIComponent(texto + " " + url), "_blank", "noopener");
       }
     }
     if (action === "coa") {
