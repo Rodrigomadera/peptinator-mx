@@ -89,7 +89,7 @@ const fmt = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN",
           ? filas.map(v => `<tr>${v.slice(0, 6).map(c => `<td>${c}</td>`).join("")}</tr>`).join("")
           : '<tr><td colspan="6">Sin ventas registradas aún.</td></tr>';
         document.getElementById("inv-repartos-body").innerHTML = filasR.length
-          ? filasR.map(r => `<tr>${r.slice(0, 4).map(c => `<td>${c}</td>`).join("")}</tr>`).join("")
+          ? filasR.map(r => `<tr>${[r[0], r[1], r[3]].map(c => `<td>${c||""}</td>`).join("")}</tr>`).join("")
           : '<tr><td colspan="4">Sin repartos registrados aún.</td></tr>';
       });
   }
