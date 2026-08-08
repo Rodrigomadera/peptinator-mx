@@ -152,7 +152,7 @@
     const card = e.target.closest(".card");
     if (!card) return;
     const p = PRODUCTS.find(x => x.id === card.dataset.id);
-    if (p) openModal(p);
+    if (p) window.location.href = "productos/" + p.id + ".html";
   });
 
   grid.addEventListener("keydown", e => {
@@ -161,7 +161,7 @@
     if (!card) return;
     e.preventDefault();
     const p = PRODUCTS.find(x => x.id === card.dataset.id);
-    if (p) openModal(p);
+    if (p) window.location.href = "productos/" + p.id + ".html";
   });
 
   modal.addEventListener("click", e => {
