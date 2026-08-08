@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Inversionistas | PEPTINATOR MX</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .inv-wrap { max-width: 980px; margin: 0 auto; }
+    .inv-gate { max-width: 420px; margin: 6rem auto; background: var(--bg-card); border: 1px solid var(--red-deep); padding: 2.4rem; text-align: center; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); box-shadow: 0 0 30px rgba(255,26,26,0.12); }
+    .inv-gate h1 { font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; letter-spacing: 0.06em; margin-bottom: 0.4rem; color: var(--chrome-1); }
+    .inv-gate p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.4rem; }
+    .inv-gate input { width: 100%; background: var(--bg-panel); border: 1px solid var(--chrome-3); padding: 0.7rem 1.1rem; font-family: var(--font-mono); font-size: 1rem; color: var(--chrome-1); outline: none; margin-bottom: 1rem; text-align: center; }
+    .inv-gate input:focus { border-color: var(--red); }
+    .inv-gate button { width: 100%; border: none; cursor: pointer; }
+    .inv-error { display: none; color: var(--red); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; margin-top: 0.8rem; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1.6rem 0 2.4rem; }
+    .kpi { background: var(--bg-card); border: 1px solid #26262e; padding: 1.1rem 1.2rem; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
+    .kpi span { display: block; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .kpi strong { font-family: var(--font-display); font-weight: 900; font-size: 1.3rem; color: var(--red); text-shadow: 0 0 12px var(--red-glow); }
+    .inv-card { background: var(--bg-card); border: 1px solid #26262e; padding: 1.6rem; margin-bottom: 1.6rem; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)); }
+    .inv-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; margin-bottom: 1rem; color: var(--chrome-1); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { text-align: left; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); padding: 0.5rem 0.6rem; border-bottom: 1px solid #2c2c34; }
+    td { padding: 0.55rem 0.6rem; border-bottom: 1px dashed #2c2c34; color: var(--text); }
+    .inv-note { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+
+  <header class="hud-header">
+    <a class="logo" href="sitio.html">PEPTINATOR<span class="logo-mx">MX</span></a>
+    <nav class="main-nav">
+      <a href="sitio.html#catalogo">Catálogo</a>
+      <a href="sitio.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="inv-wrap">
+    <!-- Login -->
+    <div class="inv-gate" id="inv-gate">
+      <p class="mono" style="color:var(--red);font-size:0.75rem;letter-spacing:0.2em;margin-bottom:1rem">// ACCESO RESTRINGIDO</p>
+      <h1>PORTAL DE INVERSIONISTAS</h1>
+      <p>Introduce la contraseña compartida.</p>
+      <input type="password" id="inv-pass" placeholder="Contraseña" autocomplete="off">
+      <button class="btn btn-primary" id="inv-entrar" type="button">▸ Entrar</button>
+      <p class="inv-error" id="inv-error">CONTRASEÑA INCORRECTA</p>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="inv-dash" style="display:none">
+      <section>
+        <div class="section-head">
+          <p class="mono section-kicker">// TRANSPARENCIA EN VIVO</p>
+          <h2>PANEL DE INVERSIONISTAS</h2>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi"><span>Ingresos</span><strong id="k-ingresos">—</strong></div>
+          <div class="kpi"><span>Viales vendidos</span><strong id="k-unidades">—</strong></div>
+          <div class="kpi"><span>Utilidad neta est.</span><strong id="k-utilidad">—</strong></div>
+          <div class="kpi"><span>Fondo de reparto</span><strong id="k-fondo">—</strong></div>
+          <div class="kpi"><span>Repartido a ti</span><strong id="k-repartido">—</strong></div>
+        </div>
+        <div class="inv-card">
+          <h3>VENTAS REGISTRADAS</h3>
+          <table>
+            <thead><tr><th>Fecha</th><th>Marca</th><th>Producto</th><th>Cant.</th><th>Total</th><th>Método</th></tr></thead>
+            <tbody id="inv-ventas-body"></tbody>
+          </table>
+        </div>
+        <div class="inv-card">
+          <h3>REPARTOS DE UTILIDADES</h3>
+          <table>
+            <thead><tr><th>Fecha</th><th>Inversionista (40%)</th><th>Empresa (60%)</th><th>Notas</th></tr></thead>
+            <tbody id="inv-repartos-body"></tbody>
+          </table>
+        </div>
+        <p class="inv-note">// Datos en vivo desde el libro contable compartido. La utilidad neta estimada considera el costo de proveedor por vial; el fondo corresponde al 50% distribuible menos lo ya repartido. Proyección, no garantía.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/investors.js"></script>
+</body>
+</html>
